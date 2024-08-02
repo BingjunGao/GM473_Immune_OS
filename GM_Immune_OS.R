@@ -67,3 +67,41 @@ res_single <- mr_singlesnp(harm_rt)
 p4 <- mr_funnel_plot(singlesnp_res)
 p4[[1]]
 
+
+
+
+library(BWMR)
+library(ggplot2)
+
+library(data.table)
+
+
+path_res <- ('')
+
+
+ExampleData <- fread(paste0(path_res,'/******.txt')) #harmonise data
+
+
+fit.BWMR <- BWMR(gammahat = ExampleData$beta.exposure,
+                 Gammahat = ExampleData$beta.outcome,
+                 sigmaX = ExampleData$se.exposure,
+                 sigmaY = ExampleData$se.outcome) 
+
+pdf(paste0(path_res,'/BWMR1.pdf'),height = 8,width = 9)
+fit.BWMR$plot1
+dev.off()
+
+pdf(paste0(path_res,'/BWMR2.pdf'),height = 8,width = 9)
+fit.BWMR$plot2
+dev.off()
+
+pdf(paste0(path_res,'/BWMR3.pdf'),height = 8,width = 9)
+fit.BWMR$plot3
+dev.off()
+
+pdf(paste0(path_res,'/BWMR4.pdf'),height = 8,width = 9)
+fit.BWMR$plot4
+dev.off()
+
+
+fit.BWMR
